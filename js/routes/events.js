@@ -1,12 +1,7 @@
-// !! Incomplete code !!
 const express = require('express');
 const axios = require('axios');
 const router = express.Router();
-
-app.get('/', (req, res) => {
-  res.send('Server is running!');
-});
-
+const Event = require('../server/models/Event');
 
 router.get('/', async (req, res) => {
   const { city } = req.query;
@@ -24,19 +19,40 @@ router.get('/', async (req, res) => {
       }
     );
 
-    const events = response.data._embedded?.events.map(e => ({
-      id: e.id,
-      name: e.name,
-      date: e.dates.start.localDate,
-      venue: e._embedded.venues[0].name,
-      url: e.url
-    })) || [];
+    const embedded = response.data._embedded;
+    const eventsRaw = embedded?.events || [];
+    const events = [];
+
+    
+
+    for (let e of eventsRaw) {
+      // Fetch images for the specific event using its ID
+      
+      const eventData = {
+        id: e.id,
+        name: e.name,
+        date: e.dates.start.localDate,
+        venue: e._embedded?.venues?.[0]?.name || 'Unknown Venue',
+        url: e.url,
+        images: e.images || [],
+        category
+      };
+
+      // Save if it doesn't already exist
+      const existing = await Event.findOne({ id: eventData.id });
+      if (!existing) {
+        await Event.create(eventData);
+      }
+
+      events.push(eventData);
+    }
 
     res.json({ events });
+
   } catch (err) {
+    console.error('Error fetching events:', err.message);
     res.status(500).json({ error: 'Error fetching events' });
   }
 });
 
 module.exports = router;
-

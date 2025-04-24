@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events Explorer</title>
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+
+  <nav>
+    <h2>Events Explorer</h2>
+    <a href="/" class="nav-link">Home</a> <!-- Link to the home page -->
+    <a href="#" onclick="showSavedEvents()" class="nav-link">View Favorites</a> <!-- Link to view favorites -->
+  
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Enter a city..." />
+      <button onclick="searchEvents()">Search</button>
+    </div>
+  </nav>
+
+  <main id="mainContent">
+    <h1>Welcome to Events Explorer</h1>
+    <p>Discover events happening in your city!</p>
+    <!-- Sections for different types of events -->
+
+    <!-- Container for displaying search results or saved events -->
+    <div id="results"></div>
+
+    <div id="eventList">
+      <section id="featuredEvents">
+        <h2>Featured Events</h2>
+        <div class="event-container"></div> <!-- Container for featured events -->
+      </section>
+
+      <section id="concerts">
+        <h2>Concerts</h2>
+        <div class="event-container"></div> <!-- Container for concerts -->
+      </section>
+
+      <section id="sports">
+        <h2>Sports</h2>
+        <div class="event-container"></div> <!-- Container for sports -->
+      </section>
+
+      <section id="theater">
+        <h2>Theater</h2>
+        <div class="event-container"></div> <!-- Container for theater events -->
+      </section>
+
+    </div> <!-- Container for displaying events -->
+  </main>
+
+  <script src="./index.js"></script>
+</body>
+
+<footer>
+  <br />
+  <br />
+
+  <!-- first row -->
+  <div class="cols">
+    <!-- first column with branding information -->
+    <div class="about-col">
+        <h3>Shekia Tillerson</h3>
+        <p>Event Explorer</p>
+        <p>shekiatillerson@oakland.edu</p>
+        &copy; Event Explorer 2025
+        
+    </div>
+
+    
+  </div>
+</footer>
+</html>
